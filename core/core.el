@@ -71,12 +71,13 @@
 (use-package f :demand t)
 (use-package s :demand t)
 (use-package string-inflection :demand t)
-
+(use-package diminish)
 
 (dolist (core-module '(core-util
 		       core-module
 		       core-theme
-		       core-bindings))
+		       core-bindings
+			   core-projects))
   (require core-module))
 
 (provide 'core)
