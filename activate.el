@@ -7,8 +7,12 @@
 (defvar my--active-modules)
 
 (setq my--active-modules '(
+						   :checkers
+						   (syntax +flycheck)
 						   :completion
 						   core-completion
+						   :os
+						   macos
 						   :tools
 						   shell
 						   vc
