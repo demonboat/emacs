@@ -1,5 +1,7 @@
 (require 'core-elpaca)
 
+
+;; Will most likely be needing more stuff with java..
 (package! flycheck
   :if (feature-p! +flycheck)
   :init (global-flycheck-mode 1)
