@@ -1,4 +1,4 @@
-;;; activate.el -*- lexical-binding: t; -*-
+;;; activate.el --- active modules -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;; Choose which modules to run
 ;;; Code:
@@ -11,6 +11,8 @@
 						   (syntax +flycheck)
 						   :completion
 						   core-completion
+						   :language
+						   racket
 						   :os
 						   macos
 						   :tools
@@ -22,4 +24,4 @@
 						   which-key))
 
 (provide 'activate)
-;; activate.el ends here.
+;;; activate.el ends here.
