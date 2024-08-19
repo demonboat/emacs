@@ -12,12 +12,9 @@
 						   :completion
 						   core-completion
 						   :language
-<<<<<<< HEAD
 						   racket
-=======
 						   lsp
 						   java
->>>>>>> bc79687 (feat: added java and lsp.)
 						   :os
 						   macos
 						   :tools
