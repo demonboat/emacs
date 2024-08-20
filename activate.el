@@ -15,6 +15,7 @@
 						   racket
 						   lsp
 						   java
+						   gradle
 						   :os
 						   macos
 						   :tools

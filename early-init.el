@@ -47,3 +47,5 @@
 
 (require 'core-module)
 (core-module/load-config)
+
+;;; early-init.el ends here
