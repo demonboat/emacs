@@ -23,7 +23,6 @@
 (package! cape
   :after corfu
   :init
-  
   (add-to-list 'completion-at-point-functions #'cape-dabbrev)
   (add-to-list 'completion-at-point-functions #'cape-dict)
   (add-to-list 'completion-at-point-functions #'cape-file)
@@ -36,12 +35,16 @@
 ;; Specific completion style for corfu and vertico
 (package! orderless
   :custom
-  (completion--styles '(orderless basic))
+  (completion--styles '(partial-completion orderless basic))
   (completion--category-override '((file (styles basic partial-completion)))))
 
 ;; Vertical completion UI
 (package! vertico
   :init (vertico-mode))
+
+(package! consult)
+(package! consult-lsp
+  :after lsp)
 
 ;; Saving history completion
 (savehist-mode)
@@ -56,3 +59,4 @@
   :config (nerd-icons-completion-mode)
   :hook (marginalia-mode . nerd-icons-completion-marginalia-setup))
 
+(package! yasnippet)

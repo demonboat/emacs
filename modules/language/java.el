@@ -1,5 +1,7 @@
 (require 'core-elpaca)
 
+(setq lsp-java-server-install-dir "~/.eclipse.jdt.ls/")
+
 ;; Being able to easily run tests for the file currently focused on.
 (defun run-test-for-buffer-file ()
   (let* ((project (project-current))
@@ -12,6 +14,12 @@
 		;; Run the script asynchronously
 		(shell-command (format "%s %s" script-path file-name))
 	  (error "Gradlew could not be found or is not executable"))))
+
+(defun update-jdtls ()
+  "Deletes the jdtls location and runs install-jdtls again, as it would fetch the latest snapshot"
+  (interactive)
+  (delete-directory lsp-java-server-install-dir)
+  (install-jdtls))
 
 (defun install-jdtls ()
   "This downloads jdtls without using the annoying maven installer,
@@ -37,11 +45,17 @@
   (delete-file jdtls-download-path)
   (message "eclipse jdtls was successfully added to %s" lsp-java-server-install-dir)))
 
+(defun fetch-lombok ()
+  "Fetches lombok and puts it in the home directory"
+  (interactive)
+  
+  (let ((lombok-location (expand-file-name "lombok.jar" "~/")))
+	(url-copy-file "https://projectlombok.org/downloads/lombok.jar" lombok-location t))
+  (message "Lombok downloaded to ~/lombok.jar"))
+
 (package! lsp-java
   :hook (java-mode . lsp)
-  :bind ("M-o" . run-test-for-buffer-file)
-  :config
-  (setq lsp-java-server-install-dir "~/.eclipse.jdt.ls/"))
+  :bind ("M-o" . run-test-for-buffer-file))
 
 (after! lsp-java
   (setenv "JAVA_HOME" "/Users/lupentin/.sdkman/candidates/java/17.0.10-amzn/")
@@ -49,4 +63,15 @@
   (setq lsp-java-configuration-runtimes `[
                                           (:name "JavaSE-17"
                                            :path ,(getenv "JAVA_HOME")
-                                           :default t)]))
+                                           :default t)])
+  (setq lsp-java-vmargs
+		'("-noverify"
+		  "-Xmx2G"
+		  "-XX:+UseG1GC"
+		  "-XX:+UseStringDeduplication"
+		  "-javaagent:/Users/lupentin/lombok.jar"))
+
+  (require 'lsp-java-boot)
+
+  (add-hook 'lsp-mode-hook #'lsp-lens-mode)
+  (add-hook 'java-mode-hook #'lsp-java-boot-lens-mode))
