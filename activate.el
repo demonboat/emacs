@@ -10,6 +10,7 @@
 						   :checkers
 						   (syntax +flycheck)
 						   :completion
+						   company
 						   core-completion
 						   :language
 						   racket
@@ -22,6 +23,7 @@
 						   shell
 						   vc
 						   :ui
+						   helm
 						   icons
 						   modeline
 						   which-key))

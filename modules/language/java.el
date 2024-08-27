@@ -55,7 +55,7 @@
 
 (package! lsp-java
   :hook (java-mode . lsp)
-  :bind ("M-o" . run-test-for-buffer-file))
+  :bind ("M-i" . lsp-java-add-import))
 
 (after! lsp-java
   (setenv "JAVA_HOME" "/Users/lupentin/.sdkman/candidates/java/17.0.10-amzn/")
@@ -71,7 +71,10 @@
 		  "-XX:+UseStringDeduplication"
 		  "-javaagent:/Users/lupentin/lombok.jar"))
 
-  (require 'lsp-java-boot)
+  (setq lsp-java-code-generation-to-string-code-style "STRING_BUILDER")
 
-  (add-hook 'lsp-mode-hook #'lsp-lens-mode)
-  (add-hook 'java-mode-hook #'lsp-java-boot-lens-mode))
+  ;;(require 'lsp-java-boot)
+  ;;(setq lsp-java-boot-java-tools-jar (concat lsp-java-server-install-dir "/boot-server/spring-boot-language-server-1.57.0-SNAPSHOT-exec.jar"))
+  
+  (add-hook 'lsp-mode-hook #'lsp-lens-mode))
+  ;;(add-hook 'java-mode-hook #'lsp-java-boot-lens-mode))

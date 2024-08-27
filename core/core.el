@@ -58,6 +58,10 @@
 				vc-follow-symlinks t
 				find-file-visit-truename t
 				inhibit-compacting-font-caches t)
+  (setq mac-option-modifier 'meta
+		mac-right-option-modifier 'none
+		mac-command-modifier 'super
+		mac-control-modifier 'control)
 
   :bind (([escape] . keyboard-escape-quit)))
 

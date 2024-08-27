@@ -40,6 +40,12 @@
 (when (>= emacs-major-version 27)
   (setq package-enable-at-startup nil))
 
+(when (member "Fantasque Sans Mono" (font-family-list))
+  (set-face-attribute 'default nil
+                      :font "Fantasque Sans Mono" 
+                      :height 160
+                      :weight 'regular))
+
 (setq user-emacs-directory (file-name-directory load-file-name))
 
 (load (expand-file-name "core/core" user-emacs-directory)
